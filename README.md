@@ -10,6 +10,7 @@
   <a href="https://bvolpato.github.io/kevala/">Live site</a> ·
   <a href="https://bvolpato.github.io/kevala/#/playground">Playground</a> ·
   <a href="https://bvolpato.github.io/kevala/#/tetris">Tetris</a> ·
+  <a href="https://bvolpato.github.io/kevala/#/chess">Chess</a> ·
   <a href="https://www.npmjs.com/package/kevala">npm</a> ·
   <a href="examples/">Examples</a> ·
   <a href="docs/architecture.md">How it works</a>
@@ -114,6 +115,11 @@ your own browser.
 - [Tetris](https://bvolpato.github.io/kevala/#/tetris): the model plays. When a piece appears, code
   lists every spot it can land in and describes each outcome in words; the model scores them all in
   one batched pass, and the piece presses the keys (turn, left, right, drop) toward the best one.
+- [Chess](https://bvolpato.github.io/kevala/#/chess): play the shared classifier as White or Black,
+  watch classifier self-play, or play locally with no model download. Code describes the immediate
+  outcome of every legal move; `decideMany` scores them and the highest P(good move) plays.
+  These are classifier scores, not win probabilities or a strong chess engine. Includes special
+  moves, move history, undo, flip and pause; repetition and fifty-move draws are automatic.
 - [Guardrail](https://bvolpato.github.io/kevala/#/guardrail): a prompt-injection and jailbreak gate in
   front of an LLM that acts on confident answers and escalates the unsure ones.
 - [Inbox](https://bvolpato.github.io/kevala/#/inbox): triage a mailbox, with rows filling in as each
@@ -210,12 +216,20 @@ kevala bench kev-0.8b-q8.kevala --tokens 128
 kevala wgsl matmul --f16 --rows 3                  # a GPU kernel, specialized
 
 pnpm serve                                 # static server at http://127.0.0.1:8080
+uv run dev/smoke-chess.py --channel chrome   # Chess browser checks against that server; no model download
 uv run dev/record-tetris.py                  # re-record docs/tetris.gif and docs/tetris.mp4 (needs port 8123)
 cargo test --release                         # Rust tests (tokenizer, sequence and cache tests skip without their files)
 ```
 
 The core needs Rust 1.85 or newer. Python helpers generate reference fixtures and automate
 browser GPU benchmarks through `uv`.
+
+With `pnpm serve` running in another terminal, the Chess browser check uses installed Chrome
+in an isolated, headless context and a stub classifier. It covers local play, special moves,
+keyboard and mobile focus, model lifecycle, responsive layouts and switching to Tetris;
+it does not validate real model inference. Use
+`--url http://127.0.0.1:PORT` for another server, or omit `--channel chrome` after installing
+Playwright Chromium with `uv run --with playwright python -m playwright install chromium`.
 
 For reproducible GPU timing, model parity checks, and Firefox/Linux measurements, see
 [docs/gpu-benchmarks.md](docs/gpu-benchmarks.md). The benchmark distinguishes GPU kernel time
@@ -256,6 +270,9 @@ browser channel and settings; see Mozilla's [WebGPU support notes](https://devel
 
 ## Credits and license
 
+- The Chess demo vendors [chess.js 1.4.0](https://github.com/jhlywa/chess.js), by Jeff Hlywa
+  (BSD-2-Clause), for rules only, not AI. [Full license](app/chess/vendor/LICENSE) and
+  [pinned npm provenance](app/chess/vendor/README.md) ship with the local browser ESM distribution.
 - Laya is by Nandakishor M, Convai Innovations (Apache-2.0).
 - Kev is by Jared Palmer (Apache-2.0). Its base, Qwen3.5-0.8B-Base, is by the Qwen team (Apache-2.0).
 - The Laya parity fixtures reuse cases from [laya-web](https://github.com/nvkudva/laya-web), and the

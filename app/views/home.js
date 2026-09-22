@@ -296,7 +296,7 @@ const DEMOS = `<section id="demos">
     <div class="eyebrow">Demos</div>
     <h2>Try it in this browser</h2>
     <p class="lede">Each demo runs the model in this tab, through the same API a page would use.</p>
-    <div class="grid-3 demos">
+    <div class="grid-2 demos">
       <a class="card demo-card" href="#/tetris">
         <div class="art art-tetris" aria-hidden="true">
           <canvas data-f="board" width="140" height="168"></canvas>
@@ -306,6 +306,14 @@ const DEMOS = `<section id="demos">
           <h3>Tetris</h3>
           <p>For every new piece, the code describes each place it can land and the model scores all of them in one batched pass. The piece then moves to the best spot, one key at a time.</p>
           <span class="go">Watch it play →</span>
+        </div>
+      </a>
+      <a class="card demo-card" href="#/chess">
+        <div class="art art-chess" aria-hidden="true"><span>♜ ♞ ♝ ♛ ♚</span><span class="badge">legal moves → classifier scores</span></div>
+        <div class="dc-body">
+          <h3>Chess</h3>
+          <p>Play the classifier as White or Black, watch it play itself, or play a friend locally without a download. Every legal move gets a score, not a win probability.</p>
+          <span class="go">Play chess →</span>
         </div>
       </a>
       <a class="card demo-card" href="#/guardrail">

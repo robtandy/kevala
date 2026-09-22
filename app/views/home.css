@@ -64,6 +64,8 @@
 .view-home .dc-body p { color: var(--muted); font-size: 0.88rem; margin-bottom: 10px; }
 .view-home .go { color: var(--accent); font-weight: 600; font-size: 0.86rem; }
 
+.view-home .art-chess { align-content: center; gap: 14px; }
+.view-home .art-chess > span:first-child { font: 48px/1.2 "Segoe UI Symbol", "Apple Symbols", serif; color: var(--accent-2); }
 .view-home .art-tetris { grid-template-columns: auto auto; justify-content: center; gap: 18px; }
 .view-home .art-tetris canvas { width: 140px; height: 168px; border-radius: 6px; background: rgba(7, 9, 13, 0.55); box-shadow: 0 0 0 1px var(--border); }
 .view-home .keys { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; width: 118px; }

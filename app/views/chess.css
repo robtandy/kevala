@@ -1,0 +1,69 @@
+/* Chess is deliberately scoped: no changes to the Tetris board or site controls. */
+.view-chess [hidden] { display: none !important; }
+.view-chess .ch-head { padding-top: 28px; }
+.view-chess .ch-head h1 { font-size: clamp(1.65rem, 3.6vw, 2.5rem); }
+.view-chess .ch-head p { max-width: 78ch; }
+.view-chess .ch-controls { display: flex; gap: 14px; flex-wrap: wrap; align-items: end; margin: 22px 0 18px; }
+.view-chess .ch-controls select { max-width: 100%; }
+.view-chess .ch-actions { flex: 1; justify-content: flex-end; }
+.view-chess .ch-control-note { flex-basis: 100%; margin: 0; }
+.view-chess .ch-layout { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 26px; align-items: start; }
+.view-chess .ch-play, .view-chess .ch-side { min-width: 0; }
+.view-chess .ch-status { font-weight: 650; min-height: 2.6em; padding: 4px 0 10px; }
+.view-chess .ch-board { display: grid; grid-template-rows: repeat(8, 1fr); aspect-ratio: 1; width: 100%; border: 2px solid var(--border-2); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); }
+.view-chess .ch-rank { display: grid; grid-template-columns: repeat(8, 1fr); min-height: 0; }
+.view-chess .ch-rank > div { min-width: 0; min-height: 0; }
+.view-chess .ch-square { width: 100%; height: 100%; position: relative; border: 0; border-radius: 0; padding: 0; display: grid; place-items: center; cursor: pointer; touch-action: manipulation; isolation: isolate; }
+.view-chess .ch-square.light { background: #8c9aae; }
+.view-chess .ch-square.dark { background: #40536e; }
+.view-chess .ch-square.last-move.light { background: #b0a36d; }
+.view-chess .ch-square.last-move.dark { background: #867943; }
+.view-chess .ch-square.selected { box-shadow: inset 0 0 0 4px #45e0c0; }
+.view-chess .ch-square.in-check { background: #be5164; }
+.view-chess .ch-square:focus-visible { outline: 3px solid #fff; outline-offset: -6px; z-index: 2; }
+.view-chess .ch-square.legal::after { content: ""; position: absolute; width: 23%; height: 23%; background: #143d36; border: 2px solid #73ffde; border-radius: 50%; pointer-events: none; z-index: 2; }
+.view-chess .ch-square.legal.occupied::after { width: 88%; height: 88%; background: transparent; border-width: 4px; }
+.view-chess .ch-coordinate { position: absolute; top: 1px; left: 3px; font: 650 clamp(8px, 1.3vw, 11px)/1.3 var(--mono); color: #0c1727; }
+.view-chess .ch-square.dark .ch-coordinate { color: #fff; }
+.view-chess .ch-piece { font-family: "Segoe UI Symbol", "Apple Symbols", "Noto Sans Symbols 2", serif; font-size: clamp(27px, 5.3vw, 58px); line-height: 1; user-select: none; }
+.view-chess .white-piece { color: #fffae9; -webkit-text-stroke: 1px #1b2330; text-shadow: 0 2px 2px #152033; }
+.view-chess .black-piece { color: #142034; -webkit-text-stroke: 1px #e3e9f2; text-shadow: 0 2px 2px #172337; }
+.view-chess .ch-instructions { margin: 12px 0 0; }
+.view-chess .ch-promotion { margin-top: 12px; display: grid; gap: 10px; border-color: var(--accent-2); }
+.view-chess .ch-promotion button { text-transform: capitalize; }
+.view-chess .ch-side { display: grid; gap: 18px; padding-top: 4px; }
+.view-chess .ch-side h2 { font-size: 1.15rem; }
+.view-chess .ch-model strong { color: var(--text-2); }
+.view-chess .ch-metrics { font: 600 .9rem/1.5 var(--mono); color: var(--accent-2); margin: 16px 0; }
+.view-chess .ch-score-head { display: flex; justify-content: space-between; gap: 10px; }
+.view-chess .ch-candidates { padding: 0; list-style: none; margin: 7px 0 16px; }
+.view-chess .ch-candidates li { display: flex; justify-content: space-between; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: .87rem; }
+.view-chess .ch-candidates li.chosen { color: var(--accent-2); }
+.view-chess .ch-details summary { cursor: pointer; color: var(--text-2); font-size: .86rem; }
+.view-chess .ch-details p { margin: 10px 0; }
+.view-chess .ch-details pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: .75rem; max-height: 360px; }
+.view-chess .ch-error { border-color: var(--bad); margin-bottom: 12px; }
+.view-chess .ch-error p { overflow-wrap: anywhere; }
+.view-chess .ch-error .tiny { margin: 10px 0 0; }
+.view-chess .ch-history-scroll { max-height: 215px; overflow: auto; }
+.view-chess .ch-history-scroll p { margin: 0; }
+.view-chess .ch-history table { width: 100%; border-collapse: collapse; text-align: left; font: .85rem/1.5 var(--mono); }
+.view-chess .ch-history th, .view-chess .ch-history td { padding: 5px 10px; border-bottom: 1px solid var(--border); }
+.view-chess .ch-history thead th { color: var(--muted); font-size: .75rem; }
+.view-chess .ch-explain { margin: 30px 0 12px; }
+.view-chess .ch-explain p { color: var(--muted); font-size: .85rem; }
+@media (max-width: 850px) {
+  .view-chess .ch-layout { grid-template-columns: 1fr; gap: 22px; }
+  .view-chess .ch-play { max-width: 600px; width: 100%; margin: auto; }
+  .view-chess .ch-piece { font-size: clamp(27px, 8.4vw, 58px); }
+  .view-chess .ch-coordinate { font-size: clamp(8px, 1.8vw, 11px); }
+  .view-chess .ch-actions { flex-basis: 100%; justify-content: flex-start; }
+}
+@media (max-width: 420px) {
+  .view-chess .wrap { width: calc(100% - 24px); }
+  .view-chess .ch-controls { padding: 14px; }
+  .view-chess .ch-controls .field { width: 100%; }
+  .view-chess .ch-actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .view-chess .ch-actions .btn { padding: 10px; font-size: .8rem; }
+  .view-chess .ch-side .card { padding: 15px; }
+}

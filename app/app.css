@@ -13,7 +13,7 @@
 /* model chip + panel */
 .mm { position: relative; }
 .mchip {
-  display: inline-flex; align-items: center; gap: 8px; font: 600 0.84rem/1 var(--sans); color: var(--text);
+  display: inline-flex; align-items: center; gap: 8px; font: 600 0.84rem/1 var(--sans); color: var(--text); white-space: nowrap;
   background: var(--surface-2); border: 1px solid var(--border-2); border-radius: 999px; padding: 7px 11px 7px 10px; cursor: pointer;
   transition: border-color 0.15s, background 0.15s;
 }
@@ -71,6 +71,11 @@
   .tabs-nav a { padding: 7px 8px; }
   .nav .wrap { gap: 10px; }
   .mchip .mc-state { display: none; }
+}
+/* Scroll the extra demo tabs before squeezing a long model/backend label. */
+@media (min-width: 761px) and (max-width: 1200px) {
+  .tabs-nav { min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  .tabs-nav a[aria-current]::after { bottom: 0; }
 }
 @media (max-width: 760px) {
   .nav .wrap { height: auto; min-height: 58px; flex-wrap: wrap; padding: 8px 0; }

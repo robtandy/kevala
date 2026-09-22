@@ -12,6 +12,7 @@ const ROUTES = [
   defineRoute("home", "Home", "kevala · decision models that run in the page"),
   defineRoute("playground", "Playground", "Playground · kevala"),
   defineRoute("tetris", "Tetris", "Tetris played by a decision model · kevala"),
+  defineRoute("chess", "Chess", "Chess scored by a decision model · kevala"),
   defineRoute("guardrail", "Guardrail", "Prompt guardrail · kevala"),
   defineRoute("inbox", "Inbox", "Inbox triage · kevala"),
   defineRoute("how", "How it works", "How kevala works"),
